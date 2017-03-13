@@ -1,16 +1,18 @@
+install.packages('xlsx')
+install.packages('vegan')
+library(rJava)
 library(xlsx)
 library(vegan)
 
 
-setwd("")
+#setwd("")
 
-DF  <- read.xlsx("OutputScriptMarie_KovatsMatchOnly70.xlsx",6, as.data.frame=TRUE, header=TRUE)
-
+DF  <- read.csv("C:/Users/Claire Rusch/Desktop/OutputScriptMarie_KovatsMatchOnly70.csv", header=TRUE)
 
 # All Orchid species but NO PINK HABANERIA
 DFChem <- DF[c(1:39, 54:119),3:56]
 rownames(DFChem) <- DF$Species[c(1:39, 54:119)]
-nmds <- metaMDS(DFChem, k=2, trymax=200)
+nmds <- metaMDS(DFChem, k=3, trymax=200)
 stressplot(nmds)
 plot(nmds)
 
